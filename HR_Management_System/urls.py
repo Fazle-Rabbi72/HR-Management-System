@@ -24,6 +24,8 @@ urlpatterns = [
     path('',include('user.urls')),
     path('attendance/',include('attendance.urls')),
     path('api/auth/',include('rest_framework.urls')),
+    path('leave_request/',include('leave_request.urls')),
+    path('performance_review/',include('performance_review.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
