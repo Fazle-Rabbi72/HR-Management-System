@@ -53,6 +53,7 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(source='user.email')
     role = serializers.ChoiceField(choices=User.ROLE_CHOICES, source='user.role')
     password = serializers.CharField(write_only=True)
+    profile_image = serializers.ImageField(required=False)
 
     class Meta:
         model = Employee

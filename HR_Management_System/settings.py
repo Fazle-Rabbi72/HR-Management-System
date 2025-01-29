@@ -16,7 +16,7 @@ env = environ.Env()
 environ.Env.read_env()
 
 
-import cloudinary_storage
+import cloudinary
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'attendance',
     'leave_request',
     'performance_review',
-    'cloudinary_storage',
     'cloudinary',
 ]
 
@@ -160,13 +159,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME':'dwuadnsna' ,
-    'API_KEY':'231428713795768',
-    'API_SECRET':'Ad6LaDcYIiDBTUM0wdON8D95AOg' ,
-}
 
 
+cloudinary.config(
+    cloud_name='dwuadnsna', 
+    api_key='231428713795768',        
+    api_secret='Ad6LaDcYIiDBTUM0wdON8D95AOg', 
+)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -178,4 +177,3 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
