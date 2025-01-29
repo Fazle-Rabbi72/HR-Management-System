@@ -22,7 +22,7 @@ class Employee(models.Model):
     date_of_joining = models.DateField()
     phone = models.CharField(max_length=15)
     address = models.TextField()
-    profile_image = models.ImageField(upload_to='profile_images', null=True, blank=True)
+    profile_image = models.FileField(upload_to='profile_images', null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.username} - {self.department}"
