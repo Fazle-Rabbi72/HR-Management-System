@@ -1,0 +1,17 @@
+{
+    "builds": [
+      {
+        "src": "HR_Management_System/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "HR_Management_System/wsgi.py"
+      }
+    ],
+    "regions": ["sin1"] 
+  }
+  

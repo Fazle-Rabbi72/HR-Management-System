@@ -32,7 +32,8 @@ SECRET_KEY = 'django-insecure-m!9m3j)wt2w79a7vl(d9mr4k_^v+p8q4lixt^_-#!$b9zo$w$1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app']
+
 AUTH_USER_MODEL = "user.User"
 
 # Application definition
@@ -105,7 +106,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'HR_Management_System.wsgi.application'
+WSGI_APPLICATION = 'HR_Management_System.wsgi.app'
 
 
 # Database
