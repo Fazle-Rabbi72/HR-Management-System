@@ -22,7 +22,7 @@ from user.models import User
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
-    permission_classes = [IsAuthenticated]
+    
 
     def get_serializer_class(self):
         # Use the appropriate serializer based on the action
@@ -48,7 +48,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
 class DepartmentViewSet(ModelViewSet):
     queryset = Department.objects.all()
     serializer_class = DepartmentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]  # Read-only for unauthenticated users
+    # permission_classes = [IsAuthenticatedOrReadOnly]  # Read-only for unauthenticated users
 
 
 
@@ -80,15 +80,19 @@ class LoginView(APIView):
                     # Create or fetch the auth token
                     token, _ = Token.objects.get_or_create(user=user)
                     
+                    
+
+                    
                     # Log the user in (create a session)
                     login(request, user)
-                    
                     return Response({
                         'token': token.key,
-                        'user_id': user.id,
+                        'id': user.id if user.role == 'admin' else None,
+                        'user_id': user.employee.id if hasattr(user, 'employee') and user.role == 'employee' else None,
                         'username': user.username,
-                        'role': user.role
+                        'role': user.role,
                     }, status=status.HTTP_200_OK)
+
                 else:
                     return Response({"error": "Invalid credentials or inactive user."}, status=status.HTTP_401_UNAUTHORIZED)
             

@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import timedelta
-from user.models import User
+from user.models import Employee 
 
 # Attendance Model
 class Attendance(models.Model):
     STATUS_CHOICES = (
         ('Present', 'Present'),
         ('Absent', 'Absent'),
+        ('Late', 'Late'),
     )
-    employee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='attendances')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='attendances')
     date = models.DateField()
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
     punch_in = models.DateTimeField(null=True, blank=True)  # Punch-in time
