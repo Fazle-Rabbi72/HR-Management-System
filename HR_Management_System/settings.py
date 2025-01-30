@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'user',
     'attendance',
     'leave_request',
+    'project',
     'performance_review',
     'cloudinary',
 ]
