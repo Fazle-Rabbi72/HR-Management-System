@@ -53,11 +53,13 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
+    'django_filters',
     # Custom apps
     'user',
     'attendance',
     'leave_request',
     'project',
+    'payroll',
     'performance_review',
     'cloudinary',
 ]
@@ -107,6 +109,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'HR_Management_System.wsgi.app'
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
 
 
 # Database

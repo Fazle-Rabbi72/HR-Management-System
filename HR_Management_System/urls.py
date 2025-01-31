@@ -27,6 +27,7 @@ urlpatterns = [
     path('leave_request/',include('leave_request.urls')),
     path('performance_review/',include('performance_review.urls')),
     path('project/',include('project.urls')),
+    path('payroll/',include('payroll.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

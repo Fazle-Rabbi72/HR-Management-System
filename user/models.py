@@ -10,6 +10,7 @@ class User(AbstractUser):
         ('employee', 'Employee'),
     )
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='employee')
+    otp = models.CharField(max_length=6, blank=True, null=True) 
     
 class Department(models.Model):
     name = models.CharField(max_length=100)
