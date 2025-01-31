@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import User, Employee, Department
 
 class EmployeeSerializer(serializers.ModelSerializer):
@@ -76,11 +78,49 @@ class EmployeeCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user_data = validated_data.pop('user')
         password = validated_data.pop('password')
+
+        # Create User
         user = User(**user_data)
         user.set_password(password)  # Hash password
         user.save()
+
+        # Create Employee
         employee = Employee.objects.create(user=user, **validated_data)
+
+        # Send Email Notification with username, email, and password
+        self.send_employee_email(employee, password)
+
         return employee
+
+    def send_employee_email(self, employee, password):
+        subject = "Your Job Confirmation at Our Company"
+        message = f"""
+        Dear {employee.user.first_name} {employee.user.last_name},
+
+        Congratulations! You have been successfully appointed as **{employee.designation}** in the **{employee.department.name}** department. 
+
+        Your role in our system: **{employee.user.get_role_display()}**.
+        Your joining date: **{employee.date_of_joining}**.
+
+        Here are your login details:
+        🔹 **Username**: {employee.user.username}
+        🔹 **Email**: {employee.user.email}
+        🔹 **Password**: {password}
+
+        Please log in to your account and change your password as soon as possible.
+
+        Login URL: http://127.0.0.1:8000/login/
+
+        Regards,  
+        HR Team  
+        """
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,  # Ensure this is set in settings.py
+            [employee.user.email],
+            fail_silently=False,
+        )
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
