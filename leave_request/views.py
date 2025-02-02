@@ -1,12 +1,18 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from .models import Leave
 from .serializers import LeaveSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 class LeaveViewSet(ModelViewSet):
     queryset = Leave.objects.all()
     serializer_class = LeaveSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    filter_backends = [DjangoFilterBackend ,filters.SearchFilter]  
+    filterset_fields = ["employee"] 
 
     def get_queryset(self):
         if self.request.user.is_staff:
