@@ -7,10 +7,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
 class LeaveViewSet(ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Leave.objects.all()
     serializer_class = LeaveSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
     filter_backends = [DjangoFilterBackend ,filters.SearchFilter]  
     filterset_fields = ["employee"] 
 
