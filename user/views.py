@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate,login
 from django.core.mail import send_mail
 import random
 from django.utils.timezone import now
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 
 
 # Create your views here.
@@ -104,6 +106,8 @@ class LoginView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ChangePasswordView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     
     def post(self, request):
         serializer=ChangePasswordSerializer(data=request.data)

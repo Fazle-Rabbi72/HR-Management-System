@@ -111,9 +111,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'HR_Management_System.wsgi.app'
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
-
+    
+    
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
