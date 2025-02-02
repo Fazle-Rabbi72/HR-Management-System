@@ -1,25 +1,17 @@
 {
-  "builds": [
-    {
-      "src": "HR_Management_System/wsgi.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb",  
-        "runtime": "python3.12"
+    "builds": [
+      {
+        "src": "HR_Management_System/wsgi.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
       }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "HR_Management_System/wsgi.py"
-    }
-  ],
-  "regions": ["sin1"],
-  "functions": {
-    "api/**/*.py": {
-      "maxDuration": 30  
-      
-    }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "HR_Management_System/wsgi.py"
+      }
+    ],
+    "regions": ["sin1"] 
   }
-}
+  
