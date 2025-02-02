@@ -1,14 +1,10 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import TokenAuthentication
 from .models import Leave
 from .serializers import LeaveSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
 class LeaveViewSet(ModelViewSet):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
     queryset = Leave.objects.all()
     serializer_class = LeaveSerializer
     filter_backends = [DjangoFilterBackend ,filters.SearchFilter]  
