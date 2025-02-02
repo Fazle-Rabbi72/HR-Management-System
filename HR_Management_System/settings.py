@@ -32,6 +32,8 @@ SECRET_KEY = 'django-insecure-m!9m3j)wt2w79a7vl(d9mr4k_^v+p8q4lixt^_-#!$b9zo$w$1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app']
 
 AUTH_USER_MODEL = "user.User"
@@ -113,9 +115,6 @@ WSGI_APPLICATION = 'HR_Management_System.wsgi.app'
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
 }
     
     
@@ -188,6 +187,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
