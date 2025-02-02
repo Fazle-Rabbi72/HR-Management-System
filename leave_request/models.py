@@ -1,8 +1,8 @@
 from django.db import models
-from user.models import User
+from user.models import Employee
 
 class Leave(models.Model):
-    employee = models.ForeignKey(User, on_delete=models.CASCADE, related_name='leaves')
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE, related_name='leaves')
     start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
     reason = models.TextField()
