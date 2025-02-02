@@ -15,7 +15,6 @@ from .models import Employee
 from .serializers import EmployeeSerializer, EmployeeCreateSerializer,ChangePasswordSerializer,ResetPasswordRequestSerializer,ResetPasswordSerializer,VerifyOTPSerializer,LoginSerializer,DepartmentSerializer
 
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Department
 
 from rest_framework.views import APIView
@@ -25,6 +24,8 @@ from rest_framework.authtoken.models import Token  # Token-based auth
 from user.models import User
 
 class EmployeeViewSet(viewsets.ModelViewSet):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
     
