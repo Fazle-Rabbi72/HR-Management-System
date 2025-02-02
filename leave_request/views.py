@@ -10,7 +10,17 @@ class LeaveViewSet(viewsets.ModelViewSet):
     serializer_class = LeaveSerializer
 
     def get_queryset(self):
-        return Leave.objects.filter(employee=self.request.user.employee)
+        
+        user = self.request.user
+        if user.is_staff:  
+            return Leave.objects.all()
+        return Leave.objects.filter(employee=user.employee)
 
     def perform_create(self, serializer):
-        serializer.save(employee=self.request.user.employee)
+     
+      
+        user = self.request.user
+        if user.is_staff:  
+            serializer.save()
+        else:
+            serializer.save(employee=user.employee)

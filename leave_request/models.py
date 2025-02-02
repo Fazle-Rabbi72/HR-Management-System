@@ -23,4 +23,4 @@ class Leave(models.Model):
         return 0
 
     def __str__(self):
-        return f"{self.employee.username} - {self.start_date} to {self.end_date} ({self.status})"
+        return f"{self.employee.user.username} - {self.start_date} to {self.end_date} ({self.status})"
