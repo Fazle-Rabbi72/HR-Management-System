@@ -3,10 +3,7 @@
       {
         "src": "HR_Management_System/wsgi.py",
         "use": "@vercel/python",
-        "config": {
-          "maxLambdaSize": "50mb",  
-          "runtime": "python3.12"
-        }
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
       }
     ],
     "routes": [
@@ -15,10 +12,6 @@
         "dest": "HR_Management_System/wsgi.py"
       }
     ],
-    "regions": ["sin1"],
-    "functions": {
-      "api/**/*.py": {
-        "maxDuration": 30  
-      }
-    }
+    "regions": ["sin1"] 
   }
+  
