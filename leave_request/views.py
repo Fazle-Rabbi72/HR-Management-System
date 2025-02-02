@@ -13,36 +13,21 @@ class LeaveViewSet(ModelViewSet):
     filterset_fields = ["employee"]
 
     def get_queryset(self):
-        # Check if the user is an admin or staff
-        if self.request.user.is_staff:
-            # Admin can view all leave requests
-            return Leave.objects.all()
-
-        # Check if the user is authenticated and is an employee
-        if self.request.user.is_authenticated:
-            # Regular employees can only view their own leave requests
-            return Leave.objects.filter(employee=self.request.user)
-
-        # If not authenticated, return empty queryset
-        return Leave.objects.none()
+        # Return all leave requests for everyone
+        return Leave.objects.all()
 
     def perform_create(self, serializer):
-        # Check if the user is authenticated
-        if not self.request.user.is_authenticated:
-            raise PermissionDenied("You must be logged in to create a leave request.")
-
-        # Automatically set the employee to the logged-in user
+        # Automatically set the employee to the logged-in user for the leave request
         serializer.save(employee=self.request.user)
 
     def update(self, request, *args, **kwargs):
         leave = self.get_object()
 
-        # Check if the user is staff (admin)
+        # Allow any authenticated user to update the leave status if they are an admin
         if request.user.is_staff:
-            # Admins can update the leave status
             leave.status = request.data.get('status', leave.status)
             leave.save()
             return Response({'message': 'Leave status updated successfully.'})
 
-        # Employees cannot update their leave status
+        # Non-admin users cannot update leave status
         return Response({'error': 'Permission denied.'}, status=403)
