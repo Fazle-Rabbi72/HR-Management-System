@@ -2,14 +2,9 @@ from rest_framework import serializers
 from .models import Payroll, Payslip
 
 class PayrollSerializer(serializers.ModelSerializer):
-    employee_username = serializers.CharField(source="employee.user.username", read_only=True)
-    employee_name=serializers.CharField(source="employee.user.get_full_name", read_only=True)
     class Meta:
         model = Payroll
-        fields = [
-            "id", "employee", "basic_salary", "bonus", "deductions", 
-            "tax", "net_salary", "employee_username", "employee_name"
-        ]
+        fields = "__all__"
 
 class PayslipSerializer(serializers.ModelSerializer):
     employee_name = serializers.CharField(source="employee.user.get_full_name", read_only=True)
