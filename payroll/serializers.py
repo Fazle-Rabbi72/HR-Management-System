@@ -6,7 +6,10 @@ class PayrollSerializer(serializers.ModelSerializer):
     employee_name=serializers.CharField(source="employee.user.get_full_name", read_only=True)
     class Meta:
         model = Payroll
-        fields = "__all__"
+        fields = [
+            "id", "employee", "basic_salary", "bonus", "deductions", 
+            "tax", "net_salary", "employee_username", "employee_name"
+        ]
 
 class PayslipSerializer(serializers.ModelSerializer):
     employee_name = serializers.CharField(source="employee.user.get_full_name", read_only=True)
