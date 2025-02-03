@@ -11,9 +11,10 @@ from rest_framework import filters
 class PayrollViewSet(viewsets.ModelViewSet):
     queryset = Payroll.objects.all()
     serializer_class = PayrollSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ["employee_username","employee_name"]
 
 def send_payslip_email(payslip, paid=False):
-    """Payslip Generate বা Paid হলে Employee-কে Email পাঠানোর ফাংশন"""
     subject = f"Payslip for {payslip.month} {payslip.year} - {'Paid' if paid else 'Generated'}"
     
     message = f"""
