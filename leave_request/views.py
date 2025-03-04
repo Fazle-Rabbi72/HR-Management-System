@@ -5,8 +5,8 @@ from .models import Leave
 from .serializers import LeaveSerializer
 from django.utils.timezone import now
 class LeaveViewSet(viewsets.ModelViewSet):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
     serializer_class = LeaveSerializer
 
     def get_queryset(self):
