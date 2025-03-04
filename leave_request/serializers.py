@@ -6,6 +6,7 @@ class LeaveSerializer(serializers.ModelSerializer):
     employee_name = serializers.CharField(source="employee.user.get_full_name", read_only=True)
     designation=serializers.CharField(source="employee.designation", read_only=True)
     department=serializers.CharField(source="employee.department", read_only=True)
+    status = serializers.CharField(read_only=True)
 
     class Meta:
         model = Leave
