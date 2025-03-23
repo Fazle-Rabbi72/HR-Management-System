@@ -93,8 +93,8 @@ class LoginView(APIView):
                     login(request, user)
                     return Response({
                         'token': token.key,
-                        'id': user.id if user.role == 'admin' else None,
-                        'user_id': user.employee.id if hasattr(user, 'employee') and user.role == 'employee' else None,
+                        'id': user.id,
+                        'user_id': user.employee.id ,
                         'username': user.username,
                         'role': user.role,
                     }, status=status.HTTP_200_OK)
